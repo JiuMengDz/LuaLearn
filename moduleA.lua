@@ -37,7 +37,7 @@ function diQueen.popTail(table)
 end
 
 -- 无损遍历队列
-function diQueen.genertatorValue(table)
+function diQueen.genValueByStatu(table)
      local first = table.first
      local last = -1
      return function()
@@ -54,6 +54,27 @@ function diQueen.genertatorValue(table)
           end
           return nil
      end
+end
+
+
+-- 无状态方式无损遍历
+function diQueen.genValueWithoutStatu(table)
+     return iter, table, table.first - 1
+end
+
+function iter(table, index)
+     index = index + 1
+     if index < 0 then
+          local value = table[index]
+          return index, value
+     else
+          if index <= table.last then
+               local value = table[index]
+               index = index + 1
+               return index, value
+          end
+     end
+     return nil
 end
 
 return diQueen
