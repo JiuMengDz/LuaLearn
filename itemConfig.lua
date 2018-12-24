@@ -1,0 +1,36 @@
+Config = Config or {}
+Config.Item = {
+	[110010101] = {
+		["id"] = 110010101, 
+		["icon"] = "general/gold", 
+		["default_quality"] = 3, 
+		["default_level"] = 1, 
+		["stackable"] = true, 
+		["capacity"] = 0, 
+		["useable"] = false, 
+		["auto_use"] = false, 
+		["sendable"] = true, 
+		["resolve_id"] = 0, 
+		["type"] = 11, 
+		["second_type"] = 1, 
+		["third_type"] = 1, 
+		["gain_paths"] = {{1401, 2051}, {1102}}, 
+	}, 
+	[120010101] = {
+		["id"] = 120010101, 
+		["icon"] = "general/diamond", 
+		["default_quality"] = 4, 
+		["default_level"] = 1, 
+		["stackable"] = true, 
+		["capacity"] = 0, 
+		["useable"] = false, 
+		["auto_use"] = false, 
+		["sendable"] = true, 
+		["resolve_id"] = 0, 
+		["type"] = 12, 
+		["second_type"] = 1, 
+		["third_type"] = 1, 
+		["gain_paths"] = {{1001}, {1103}}, 
+	},
+}
+

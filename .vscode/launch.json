@@ -8,7 +8,7 @@
             "type": "lua",
             "request": "launch",
             "name": "Launch",
-            "program": "${workspaceFolder}/data_structure/data_group.lua"
+            "program": "${workspaceFolder}/fouth.lua"
             //"program": "${workspaceFolder}/third.lua"
         }
     ]
