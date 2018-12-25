@@ -1,16 +1,7 @@
-local list = {1, 5, 8, 6, 9, 5, 2, 1, 4, 5}
+local metaTB = require("moduleA")
+s1 = metaTB.new{10,20,30,50}
+s2 = metaTB.new{30,1}
+s3 = (s1 + s2)*s1
+print(metaTB.tostring(s3))
 
-function fromto(n, m)
-    local startNum = n - 1
-    local endNum = m
-    return function()
-        startNum = startNum + 1
-        if (startNum <= endNum) then
-            return list[startNum]
-        end
-    end
-end
-
-for i in fromto(2, 8) do
-    print(i)
-end
+print()

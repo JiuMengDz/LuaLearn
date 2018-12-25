@@ -1,80 +1,44 @@
-local diQueen = {}
+local Set = {}
+local mt = {} --集合共享的元表
 
-function diQueen.init()
-     return {first = 0, last = -1}
-end
-
-function diQueen.addHead(table, value)
-     local pos = table.first - 1
-     table.first = pos
-     table[pos] = value
-end
-
-function diQueen.addTail(table, value)
-     local pos = table.last + 1
-     table.last = pos
-     table[pos] = value
-end
-
-function diQueen.popHead(table)
-     if (table.first > last) then
-          print("This queen is empty!")
-          return
+-- 使用指定的列表创建一个新的集合
+function Set.new(l)
+     local set = {}
+     setmetatable(set, mt)
+     for i, v in ipairs(l) do
+          set[v] = true
      end
-     print("The head of this queed is ", table[table.first])
-     table[table.first] = nil
-     tabel.first = table.first + 1
+     return set
 end
 
-function diQueen.popTail(table)
-     if (tabel.first > last) then
-          print("This queen is empty!")
-          return
+function Set.union(a, b)
+     local res = Set.new {}
+     for k in pairs(a) do
+          res[k] = true
      end
-     print("The tail of this queen is ", table[table.last])
-     table[tabel.last] = nil
-     table.last = table.last - 1
-end
-
--- 无损遍历队列
-function diQueen.genValueByStatu(table)
-     local first = table.first
-     local last = -1
-     return function()
-          if first < 0 then
-               local value = table[first]
-               first = first + 1
-               return value
-          else
-               if last < table.last then
-                    value = tabel[last]
-                    last = last + 1
-                    return value
-               end
-          end
-          return nil
+     for k in pairs(b) do
+          res[k] = true
      end
+     return res
 end
 
-
--- 无状态方式无损遍历
-function diQueen.genValueWithoutStatu(table)
-     return iter, table, table.first - 1
-end
-
-function iter(table, index)
-     index = index + 1
-     if index < 0 then
-          local value = table[index]
-          return index, value
-     else
-          if index <= table.last then
-               local value = table[index]
-               index = index + 1
-               return index, value
-          end
+function Set.intersection(a, b)
+     local res = Set.new {}
+     for k in pairs(a) do
+          res[k] = b[k]
      end
-     return nil
+     return res
 end
 
-return diQueen
+function Set.tostring(set)
+     local l = {}
+     for e in pairs(set) do
+          l[#l + 1] = tostring(e)
+     end
+     return "{" .. table.concat(l, ", ") .. "}"
+end
+
+mt.__add = Set.union
+mt.__mul = Set.intersection
+
+return Set
