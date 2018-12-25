@@ -38,6 +38,23 @@ function Set.tostring(set)
      return "{" .. table.concat(l, ", ") .. "}"
 end
 
+mt.__le = function(a, b)
+     for k in pairs(a) do
+          if not b[k] then
+               return false
+          end
+     end
+     return true
+end
+
+mt.__lt = function(a, b)
+     return a <= b and not (b <= a)
+end
+
+mt.__eq = function(a, b)
+     return a <= b and b <= a
+end
+
 mt.__add = Set.union
 mt.__mul = Set.intersection
 
