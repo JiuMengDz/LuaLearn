@@ -1,34 +1,15 @@
-function track(t)
-    local proxy = {} --t的代理表
-
-    -- 为代理创建元表
+function readonly(t)
+    local proxy = {}
     local mt = {
-        __index = function(_, k)
-            print("*access to element " .. tostring(k))
-            return t[k] -- 返回原来的表
-        end,
+        __index = t,
         __newindex = function(_, k, v)
-            print("*update of element " .. tostring(k) .. " to " .. tostring(v))
-            t[k] = v -- 更新原来的表
-        end,
-        __pairs = function()
-            return function(_, k) --迭代函数
-                local nextkey, nextvalue = next(t, k)
-                if nextkey ~= nil then --避免最后一个值
-                    print("*traversing element " .. tostring(nextkey))
-                end
-                return nextkey, nextvalue
-            end
-        end,
-        __len = function()
-            return #t
+            error("Attempt to update a read-only table")
         end
     }
-
     setmetatable(proxy, mt)
     return proxy
 end
 
-t = track {}
-t[2] = "hello"
-print(t[2])
+days = readonly{"Monday","Tuesday","Wednesday"}
+print(days[2])
+das[2] = "None"
